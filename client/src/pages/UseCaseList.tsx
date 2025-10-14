@@ -65,8 +65,8 @@ export default function UseCaseList() {
             Dashboard
           </Button>
           <div>
-            <h1 className="text-4xl font-semibold">Use Cases</h1>
-            <p className="text-muted-foreground mt-1">
+            <h1 className="text-2xl font-semibold">Use Cases</h1>
+            <p className="text-sm text-muted-foreground mt-1">
               {filteredUseCases.length} of {useCases.length} use cases
             </p>
           </div>
