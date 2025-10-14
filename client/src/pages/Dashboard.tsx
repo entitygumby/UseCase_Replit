@@ -45,11 +45,11 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-4xl font-semibold mb-2">Use Case Portfolio</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-2xl font-semibold mb-1">Use Case Portfolio</h1>
+          <p className="text-sm text-muted-foreground">
             Track and manage AI & automation initiatives across the organization
           </p>
         </div>
@@ -61,7 +61,7 @@ export default function Dashboard() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <MetricCard
           title="Total Use Cases"
           value={totalUseCases}
@@ -89,8 +89,8 @@ export default function Dashboard() {
       </div>
 
       <div>
-        <h2 className="text-2xl font-semibold mb-6">Solution Types</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <h2 className="text-lg font-semibold mb-3">Solution Types</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <MetricCard
             title="AI Agents"
             value={aiAgentCount}
@@ -113,8 +113,8 @@ export default function Dashboard() {
       </div>
 
       <div>
-        <h2 className="text-2xl font-semibold mb-6">Implementation Phases</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <h2 className="text-lg font-semibold mb-3">Implementation Phases</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <PhaseCard
             phase="Phase 1: Foundation"
             timeline="Months 0-3"
@@ -142,9 +142,9 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="flex justify-center pt-4">
+      <div className="flex justify-center pt-2">
         <Link href="/use-cases">
-          <Button variant="outline" size="lg" data-testid="button-view-all">
+          <Button variant="outline" data-testid="button-view-all">
             View All Use Cases
           </Button>
         </Link>

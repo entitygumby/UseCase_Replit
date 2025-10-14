@@ -14,23 +14,23 @@ interface MetricCardProps {
 
 export default function MetricCard({ title, value, icon: Icon, subtitle, trend }: MetricCardProps) {
   return (
-    <Card className="p-6">
+    <Card className="p-4">
       <div className="flex items-start justify-between">
         <div className="flex-1">
-          <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground mb-2">
+          <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground mb-1">
             {title}
           </p>
-          <p className="text-4xl font-semibold tabular-nums mb-1">
+          <p className="text-2xl font-semibold tabular-nums mb-1">
             {value}
           </p>
           {subtitle && (
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               {subtitle}
             </p>
           )}
         </div>
-        <div className="p-3 bg-primary/10 rounded-md">
-          <Icon className="w-6 h-6 text-primary" />
+        <div className="p-2 bg-primary/10 rounded-md">
+          <Icon className="w-5 h-5 text-primary" />
         </div>
       </div>
       {trend && (
