@@ -1,18 +1,17 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useLocation, useRoute } from "wouter";
-import { useState } from "react";
-import UseCaseDetailView from "@/components/UseCaseDetailView";
-import DeleteConfirmDialog from "@/components/DeleteConfirmDialog";
+import UseCaseForm from "@/components/UseCaseForm";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
-import type { UseCase } from "@shared/schema";
+import type { InsertUseCase, UseCase } from "@shared/schema";
 
-export default function UseCaseDetail() {
+export default function EditUseCase() {
   const [, setLocation] = useLocation();
-  const [, params] = useRoute("/use-cases/:id");
+  const [, params] = useRoute("/use-cases/:id/edit");
   const useCaseId = params?.id;
   const { toast } = useToast();
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   const { data: useCases = [], isLoading } = useQuery<UseCase[]>({
     queryKey: ['/api/use-cases'],
@@ -20,30 +19,29 @@ export default function UseCaseDetail() {
 
   const useCase = useCases.find((uc) => uc.id === useCaseId);
 
-  const deleteMutation = useMutation({
-    mutationFn: async () => {
-      return apiRequest('DELETE', `/api/use-cases/${useCaseId}`, undefined);
+  const updateMutation = useMutation({
+    mutationFn: async (data: InsertUseCase) => {
+      return apiRequest('PUT', `/api/use-cases/${useCaseId}`, data);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/use-cases'] });
       toast({
         title: "Success",
-        description: "Use case deleted successfully",
+        description: "Use case updated successfully",
       });
-      setLocation('/use-cases');
+      setLocation(`/use-cases/${useCaseId}`);
     },
     onError: (error: Error) => {
       toast({
         title: "Error",
-        description: error.message || "Failed to delete use case",
+        description: error.message || "Failed to update use case",
         variant: "destructive",
       });
-      setDeleteDialogOpen(false);
     },
   });
 
-  const handleDelete = () => {
-    deleteMutation.mutate();
+  const handleSubmit = (data: InsertUseCase) => {
+    updateMutation.mutate(data);
   };
 
   if (isLoading) {
@@ -74,21 +72,30 @@ export default function UseCaseDetail() {
   }
 
   return (
-    <>
-      <UseCaseDetailView
-        useCase={useCase}
-        onBack={() => setLocation('/use-cases')}
-        onEdit={() => setLocation(`/use-cases/${useCaseId}/edit`)}
-        onDelete={() => setDeleteDialogOpen(true)}
+    <div className="space-y-6">
+      <div className="flex items-center gap-4">
+        <Button
+          variant="ghost"
+          onClick={() => setLocation(`/use-cases/${useCaseId}`)}
+          data-testid="button-back"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back
+        </Button>
+        <div>
+          <h1 className="text-4xl font-semibold">Edit Use Case</h1>
+          <p className="text-muted-foreground mt-1">
+            Update {useCase.name}
+          </p>
+        </div>
+      </div>
+
+      <UseCaseForm
+        defaultValues={useCase}
+        onSubmit={handleSubmit}
+        onCancel={() => setLocation(`/use-cases/${useCaseId}`)}
+        isSubmitting={updateMutation.isPending}
       />
-      <DeleteConfirmDialog
-        open={deleteDialogOpen}
-        onOpenChange={setDeleteDialogOpen}
-        onConfirm={handleDelete}
-        title="Delete Use Case?"
-        description={`Are you sure you want to delete "${useCase?.name}"? This action cannot be undone.`}
-        isDeleting={deleteMutation.isPending}
-      />
-    </>
+    </div>
   );
 }

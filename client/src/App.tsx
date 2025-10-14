@@ -7,6 +7,8 @@ import ThemeToggle from "@/components/ThemeToggle";
 import Dashboard from "@/pages/Dashboard";
 import UseCaseList from "@/pages/UseCaseList";
 import UseCaseDetail from "@/pages/UseCaseDetail";
+import CreateUseCase from "@/pages/CreateUseCase";
+import EditUseCase from "@/pages/EditUseCase";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -14,6 +16,8 @@ function Router() {
     <Switch>
       <Route path="/" component={Dashboard} />
       <Route path="/use-cases" component={UseCaseList} />
+      <Route path="/use-cases/new" component={CreateUseCase} />
+      <Route path="/use-cases/:id/edit" component={EditUseCase} />
       <Route path="/use-cases/:id" component={UseCaseDetail} />
       <Route component={NotFound} />
     </Switch>

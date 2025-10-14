@@ -80,7 +80,28 @@ export class MemStorage implements IStorage {
     const existing = this.useCases.get(id);
     if (!existing) return undefined;
     
-    const updated: UseCase = { ...existing, ...updates };
+    const updated: UseCase = {
+      ...existing,
+      name: updates.name ?? existing.name,
+      division: updates.division ?? existing.division,
+      category: updates.category ?? existing.category,
+      status: updates.status ?? existing.status,
+      solutionType: updates.solutionType ?? existing.solutionType,
+      priorityTier: updates.priorityTier !== undefined ? (updates.priorityTier ?? null) : existing.priorityTier,
+      description: updates.description !== undefined ? (updates.description ?? null) : existing.description,
+      benefits: updates.benefits !== undefined ? (updates.benefits ?? null) : existing.benefits,
+      impact: updates.impact !== undefined ? (updates.impact ?? null) : existing.impact,
+      weeklySavings: updates.weeklySavings !== undefined ? (updates.weeklySavings ?? null) : existing.weeklySavings,
+      complexity: updates.complexity !== undefined ? (updates.complexity ?? null) : existing.complexity,
+      techStack: updates.techStack !== undefined ? (updates.techStack ?? null) : existing.techStack,
+      phase: updates.phase !== undefined ? (updates.phase ?? null) : existing.phase,
+      teamContact: updates.teamContact !== undefined ? (updates.teamContact ?? null) : existing.teamContact,
+      effortEstimate: updates.effortEstimate !== undefined ? (updates.effortEstimate ?? null) : existing.effortEstimate,
+      dependencies: updates.dependencies !== undefined ? (updates.dependencies ?? null) : existing.dependencies,
+      milestones: updates.milestones !== undefined ? (updates.milestones ?? null) : existing.milestones,
+      riskAssessment: updates.riskAssessment !== undefined ? (updates.riskAssessment ?? null) : existing.riskAssessment,
+      successCriteria: updates.successCriteria !== undefined ? (updates.successCriteria ?? null) : existing.successCriteria,
+    };
     this.useCases.set(id, updated);
     return updated;
   }
