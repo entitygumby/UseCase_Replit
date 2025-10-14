@@ -55,21 +55,19 @@ export default function UseCaseList() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Button
-            variant="ghost"
-            onClick={() => setLocation('/')}
-            data-testid="button-back"
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Dashboard
-          </Button>
-          <div>
-            <h1 className="text-2xl font-semibold">Use Cases</h1>
-            <p className="text-sm text-muted-foreground mt-1">
-              {filteredUseCases.length} of {useCases.length} use cases
-            </p>
-          </div>
+        <Button
+          variant="ghost"
+          onClick={() => setLocation('/')}
+          data-testid="button-back"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Dashboard
+        </Button>
+        <div className="text-center">
+          <h1 className="text-2xl font-semibold">Use Cases</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            {filteredUseCases.length} of {useCases.length} use cases
+          </p>
         </div>
         <Button onClick={() => setLocation('/use-cases/new')} data-testid="button-create">
           <Plus className="mr-2 h-4 w-4" />
