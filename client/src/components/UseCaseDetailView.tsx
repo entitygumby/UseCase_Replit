@@ -60,7 +60,7 @@ export default function UseCaseDetailView({ useCase, onBack, onEdit, onDelete }:
       <div>
         <div className="flex items-start justify-between mb-4">
           <div>
-            <h1 className="text-4xl font-semibold mb-2">{useCase.name}</h1>
+            <h1 className="text-2xl font-semibold mb-2">{useCase.name}</h1>
             <div className="flex gap-2 items-center flex-wrap">
               <StatusBadge status={useCase.status} />
               <Badge variant="outline">{useCase.solutionType}</Badge>
