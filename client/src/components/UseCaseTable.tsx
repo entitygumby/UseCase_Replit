@@ -29,7 +29,7 @@ interface UseCaseTableProps {
 
 export default function UseCaseTable({ useCases, onRowClick }: UseCaseTableProps) {
   return (
-    <div className="border rounded-md">
+    <div className="border-2 rounded-md">
       <Table>
         <TableHeader>
           <TableRow className="hover:bg-transparent">
