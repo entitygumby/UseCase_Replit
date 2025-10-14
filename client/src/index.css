@@ -14,15 +14,15 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
 
-  --background: 236.9deg 58% 19.61%;
+  --background: 0deg 0% 92.16%;
 
-  --foreground: 0deg 0% 100%;
+  --foreground: 241.96deg 48.94% 36.86%;
 
   --border: 220 13% 91%;
 
   --card: 220 15% 97%;
 
-  --card-foreground: 220 20% 15%;
+  --card-foreground: 208.42deg 8.3% 55.1%;
 
   --card-border: 220 13% 93%;
 
@@ -54,9 +54,9 @@
 
   --secondary: 220 14% 90%;
 
-  --secondary-foreground: 220 20% 18%;
+  --secondary-foreground: 220deg 19.57% 18.04%;
 
-  --muted: 220 14% 92%;
+  --muted: 224deg 81.82% 89.22%;
 
   --muted-foreground: 220 15% 45%;
 
