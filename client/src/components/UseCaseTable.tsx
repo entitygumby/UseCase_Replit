@@ -32,13 +32,13 @@ export default function UseCaseTable({ useCases, onRowClick }: UseCaseTableProps
     <div className="border-2 border-foreground/20 rounded-md">
       <Table>
         <TableHeader>
-          <TableRow className="hover:bg-transparent">
-            <TableHead className="font-semibold">Name</TableHead>
-            <TableHead className="font-semibold">Division</TableHead>
-            <TableHead className="font-semibold">Category</TableHead>
-            <TableHead className="font-semibold">Status</TableHead>
-            <TableHead className="font-semibold">Type</TableHead>
-            <TableHead className="font-semibold">Team Contact</TableHead>
+          <TableRow className="hover:bg-transparent border-b-foreground/20">
+            <TableHead className="font-semibold border-r border-r-foreground/20">Name</TableHead>
+            <TableHead className="font-semibold border-r border-r-foreground/20">Division</TableHead>
+            <TableHead className="font-semibold border-r border-r-foreground/20">Category</TableHead>
+            <TableHead className="font-semibold border-r border-r-foreground/20">Status</TableHead>
+            <TableHead className="font-semibold border-r border-r-foreground/20">Type</TableHead>
+            <TableHead className="font-semibold border-r border-r-foreground/20">Team Contact</TableHead>
             <TableHead className="font-semibold">Priority</TableHead>
           </TableRow>
         </TableHeader>
@@ -46,24 +46,24 @@ export default function UseCaseTable({ useCases, onRowClick }: UseCaseTableProps
           {useCases.map((useCase) => (
             <TableRow
               key={useCase.id}
-              className="cursor-pointer hover-elevate"
+              className="cursor-pointer hover-elevate border-b-foreground/20"
               onClick={() => onRowClick?.(useCase.id)}
               data-testid={`row-usecase-${useCase.id}`}
             >
-              <TableCell className="font-medium max-w-xs">
+              <TableCell className="font-medium max-w-xs border-r border-r-foreground/20">
                 <div className="truncate">{useCase.name}</div>
               </TableCell>
-              <TableCell className="text-muted-foreground">{useCase.division}</TableCell>
-              <TableCell className="text-muted-foreground text-sm">{useCase.category}</TableCell>
-              <TableCell>
+              <TableCell className="text-muted-foreground border-r border-r-foreground/20">{useCase.division}</TableCell>
+              <TableCell className="text-muted-foreground text-sm border-r border-r-foreground/20">{useCase.category}</TableCell>
+              <TableCell className="border-r border-r-foreground/20">
                 <StatusBadge status={useCase.status} />
               </TableCell>
-              <TableCell>
+              <TableCell className="border-r border-r-foreground/20">
                 <Badge variant="outline" className="font-normal">
                   {useCase.solutionType}
                 </Badge>
               </TableCell>
-              <TableCell className="text-muted-foreground">{useCase.teamContact || 'N/A'}</TableCell>
+              <TableCell className="text-muted-foreground border-r border-r-foreground/20">{useCase.teamContact || 'N/A'}</TableCell>
               <TableCell>
                 {useCase.priorityTier && (
                   <Badge variant="secondary" className="font-normal">
