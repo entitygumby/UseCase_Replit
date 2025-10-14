@@ -16,7 +16,7 @@ interface UseCase {
   category: string;
   status: string;
   solutionType: string;
-  teamContact: string;
+  teamContact: string | null;
   description: string | null;
   impact: string | null;
   priorityTier: string | null;
@@ -63,7 +63,7 @@ export default function UseCaseTable({ useCases, onRowClick }: UseCaseTableProps
                   {useCase.solutionType}
                 </Badge>
               </TableCell>
-              <TableCell className="text-muted-foreground">{useCase.teamContact}</TableCell>
+              <TableCell className="text-muted-foreground">{useCase.teamContact || 'N/A'}</TableCell>
               <TableCell>
                 {useCase.priorityTier && (
                   <Badge variant="secondary" className="font-normal">

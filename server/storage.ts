@@ -50,7 +50,28 @@ export class MemStorage implements IStorage {
 
   async createUseCase(insertUseCase: InsertUseCase): Promise<UseCase> {
     const id = randomUUID();
-    const useCase: UseCase = { ...insertUseCase, id };
+    const useCase: UseCase = {
+      id,
+      name: insertUseCase.name,
+      division: insertUseCase.division,
+      category: insertUseCase.category,
+      status: insertUseCase.status,
+      solutionType: insertUseCase.solutionType,
+      priorityTier: insertUseCase.priorityTier ?? null,
+      description: insertUseCase.description ?? null,
+      benefits: insertUseCase.benefits ?? null,
+      impact: insertUseCase.impact ?? null,
+      weeklySavings: insertUseCase.weeklySavings ?? null,
+      complexity: insertUseCase.complexity ?? null,
+      techStack: insertUseCase.techStack ?? null,
+      phase: insertUseCase.phase ?? null,
+      teamContact: insertUseCase.teamContact ?? null,
+      effortEstimate: insertUseCase.effortEstimate ?? null,
+      dependencies: insertUseCase.dependencies ?? null,
+      milestones: insertUseCase.milestones ?? null,
+      riskAssessment: insertUseCase.riskAssessment ?? null,
+      successCriteria: insertUseCase.successCriteria ?? null,
+    };
     this.useCases.set(id, useCase);
     return useCase;
   }
@@ -243,7 +264,29 @@ export class MemStorage implements IStorage {
 
     mockUseCases.forEach((uc) => {
       const id = randomUUID();
-      this.useCases.set(id, { ...uc, id });
+      const useCase: UseCase = {
+        id,
+        name: uc.name,
+        division: uc.division,
+        category: uc.category,
+        status: uc.status,
+        solutionType: uc.solutionType,
+        priorityTier: uc.priorityTier ?? null,
+        description: uc.description ?? null,
+        benefits: uc.benefits ?? null,
+        impact: uc.impact ?? null,
+        weeklySavings: uc.weeklySavings ?? null,
+        complexity: uc.complexity ?? null,
+        techStack: uc.techStack ?? null,
+        phase: uc.phase ?? null,
+        teamContact: uc.teamContact ?? null,
+        effortEstimate: uc.effortEstimate ?? null,
+        dependencies: uc.dependencies ?? null,
+        milestones: uc.milestones ?? null,
+        riskAssessment: uc.riskAssessment ?? null,
+        successCriteria: uc.successCriteria ?? null,
+      };
+      this.useCases.set(id, useCase);
     });
   }
 }
