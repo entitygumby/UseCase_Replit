@@ -35,12 +35,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const result = insertUseCaseSchema.safeParse(req.body);
       if (!result.success) {
         const validationError = fromZodError(result.error);
+        console.error("Validation error:", validationError.message);
         return res.status(400).json({ error: validationError.message });
       }
 
       const useCase = await storage.createUseCase(result.data);
       res.status(201).json(useCase);
     } catch (error) {
+      console.error("Error creating use case:", error);
       res.status(500).json({ error: "Failed to create use case" });
     }
   });
