@@ -11,6 +11,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const useCases = await storage.getAllUseCases();
       res.json(useCases);
     } catch (error) {
+      console.error("Error fetching use cases:", error);
       res.status(500).json({ error: "Failed to fetch use cases" });
     }
   });
