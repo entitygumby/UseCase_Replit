@@ -55,12 +55,11 @@ The backend implements a RESTful API pattern with the following characteristics:
 
 ### Data Storage Solutions
 
-**Current State**: In-memory storage (`MemStorage` class) with seeded data for development and prototyping.
-
-**Planned Migration**: The application is architected for PostgreSQL using Drizzle ORM:
-- Schema definitions are already prepared in `shared/schema.ts`
-- Drizzle configuration points to PostgreSQL with Neon serverless driver
-- Migration infrastructure is configured and ready
+**Current State**: PostgreSQL database with persistent storage using Drizzle ORM:
+- Replit-hosted PostgreSQL database (Neon-backed)
+- Standard node-postgres (pg) driver for reliable connections
+- Drizzle ORM for type-safe database operations
+- Database seeded with 8 initial use cases via `tsx server/seed.ts`
 
 **Database Schema** (prepared for PostgreSQL):
 ```typescript
@@ -80,7 +79,12 @@ The backend implements a RESTful API pattern with the following characteristics:
 - **Solution Type** (3 options): AI Agent, AI Prompt, Automation
 - **Complexity** (3 options): Low, Medium, High
 
-**Migration Path**: The `IStorage` interface allows swapping the in-memory implementation with a Drizzle-based implementation without changing API routes or client code.
+**Implementation Details**:
+- Storage automatically switches between MemStorage (fallback) and PostgresStorage based on DATABASE_URL presence
+- Database connection uses standard `pg` driver (node-postgres) with connection pooling
+- React Query configured with `staleTime: 0` to ensure fresh data on page loads
+- Initial data seeding: Run `tsx server/seed.ts` to populate 8 demo use cases (skips if data exists)
+- Database schema synchronized via `npm run db:push` (no manual migrations needed)
 
 ### Authentication and Authorization
 
