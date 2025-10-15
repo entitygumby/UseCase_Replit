@@ -4,10 +4,10 @@ import ws from "ws";
 
 neonConfig.webSocketConstructor = ws;
 
-// In development, allow self-signed certificates
+// Configure for development - bypass SSL verification for local/dev databases
 if (process.env.NODE_ENV === 'development') {
-  neonConfig.wsProxy = (host) => `${host}?sslmode=require`;
-  neonConfig.useSecureWebSocket = true;
+  neonConfig.useSecureWebSocket = false;
+  neonConfig.pipelineTLS = false;
   neonConfig.pipelineConnect = false;
 }
 
@@ -17,7 +17,6 @@ if (!process.env.DATABASE_URL) {
 
 const pool = new Pool({ 
   connectionString: process.env.DATABASE_URL,
-  // Allow self-signed certificates in development
-  ssl: process.env.NODE_ENV === 'development' ? { rejectUnauthorized: false } : true
+  ssl: false
 });
 export const db = drizzle(pool);
