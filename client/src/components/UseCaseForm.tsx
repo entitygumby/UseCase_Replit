@@ -1,6 +1,14 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { insertUseCaseSchema, type InsertUseCase } from "@shared/schema";
+import { 
+  insertUseCaseSchema, 
+  type InsertUseCase, 
+  divisions, 
+  categories, 
+  statuses, 
+  implementationPhases, 
+  impacts 
+} from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -43,7 +51,6 @@ export default function UseCaseForm({
       category: "",
       status: "Scoping",
       solutionType: "",
-      priorityTier: "",
       description: "",
       benefits: "",
       impact: "",
@@ -101,13 +108,11 @@ export default function UseCaseForm({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Real Estate Sydney">Real Estate Sydney</SelectItem>
-                      <SelectItem value="Real Estate Brisbane">Real Estate Brisbane</SelectItem>
-                      <SelectItem value="Transaction Management">Transaction Management</SelectItem>
-                      <SelectItem value="Finance">Finance</SelectItem>
-                      <SelectItem value="Legal">Legal</SelectItem>
-                      <SelectItem value="Private Equity">Private Equity</SelectItem>
-                      <SelectItem value="Special Situations">Special Situations</SelectItem>
+                      {divisions.map((division) => (
+                        <SelectItem key={division} value={division}>
+                          {division}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -128,12 +133,11 @@ export default function UseCaseForm({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Document Generation & Management">Document Generation & Management</SelectItem>
-                      <SelectItem value="Data Extraction & Intelligence">Data Extraction & Intelligence</SelectItem>
-                      <SelectItem value="Process Automation & Workflow">Process Automation & Workflow</SelectItem>
-                      <SelectItem value="Data Entry & System Updates">Data Entry & System Updates</SelectItem>
-                      <SelectItem value="Review & Quality Assurance">Review & Quality Assurance</SelectItem>
-                      <SelectItem value="Communication & Notifications">Communication & Notifications</SelectItem>
+                      {categories.map((category) => (
+                        <SelectItem key={category} value={category}>
+                          {category}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -154,9 +158,11 @@ export default function UseCaseForm({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Live">Live</SelectItem>
-                      <SelectItem value="Developing">Developing</SelectItem>
-                      <SelectItem value="Scoping">Scoping</SelectItem>
+                      {statuses.map((status) => (
+                        <SelectItem key={status} value={status}>
+                          {status}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -189,31 +195,6 @@ export default function UseCaseForm({
 
             <FormField
               control={form.control}
-              name="priorityTier"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Priority Tier</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value || undefined}>
-                    <FormControl>
-                      <SelectTrigger data-testid="select-priority">
-                        <SelectValue placeholder="Select priority tier" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="Tier 1">Tier 1 - Quick Wins</SelectItem>
-                      <SelectItem value="Tier 2">Tier 2 - High Value</SelectItem>
-                      <SelectItem value="Tier 3">Tier 3 - Strategic</SelectItem>
-                      <SelectItem value="Tier 4">Tier 4 - Complex</SelectItem>
-                      <SelectItem value="Tier 5">Tier 5 - Monitor</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
               name="phase"
               render={({ field }) => (
                 <FormItem>
@@ -225,9 +206,11 @@ export default function UseCaseForm({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Phase 1">Phase 1: Foundation</SelectItem>
-                      <SelectItem value="Phase 2">Phase 2: Scale</SelectItem>
-                      <SelectItem value="Phase 3">Phase 3: Strategic</SelectItem>
+                      {implementationPhases.map((phase) => (
+                        <SelectItem key={phase} value={phase}>
+                          {phase}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -306,14 +289,20 @@ export default function UseCaseForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Impact</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="e.g., High - Critical for all deals"
-                        {...field}
-                        value={field.value || ""}
-                        data-testid="input-impact"
-                      />
-                    </FormControl>
+                    <Select onValueChange={field.onChange} defaultValue={field.value || undefined}>
+                      <FormControl>
+                        <SelectTrigger data-testid="select-impact">
+                          <SelectValue placeholder="Select impact level" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {impacts.map((impact) => (
+                          <SelectItem key={impact} value={impact}>
+                            {impact}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}

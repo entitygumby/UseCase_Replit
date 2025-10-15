@@ -9,6 +9,52 @@ export const users = pgTable("users", {
   password: text("password").notNull(),
 });
 
+export const divisions = [
+  "Compliance",
+  "Credit", 
+  "Finance",
+  "Funds Mgmt",
+  "HR",
+  "Private Equity",
+  "Real Estate - Bris",
+  "Real Estate - Melb",
+  "Real Estate - Syd",
+  "Special Sits",
+  "Txn Mgmt",
+  "Other"
+] as const;
+
+export const categories = [
+  "Dashboards & Reporting",
+  "Data Management",
+  "Document Generation",
+  "Notification & Alerts",
+  "Research & Analysis",
+  "Review & Quality Assurance",
+  "Workflow Automation"
+] as const;
+
+export const statuses = [
+  "New",
+  "Scoping",
+  "Developing",
+  "Live"
+] as const;
+
+export const implementationPhases = [
+  "Not Allocated",
+  "Phase 1",
+  "Phase 2",
+  "Phase 3",
+  "Phase 4"
+] as const;
+
+export const impacts = [
+  "Low",
+  "Medium",
+  "High"
+] as const;
+
 export const useCases = pgTable("use_cases", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   name: text("name").notNull(),
@@ -16,7 +62,6 @@ export const useCases = pgTable("use_cases", {
   category: text("category").notNull(),
   status: text("status").notNull(),
   solutionType: text("solution_type").notNull(),
-  priorityTier: text("priority_tier"),
   description: text("description"),
   benefits: text("benefits"),
   impact: text("impact"),
