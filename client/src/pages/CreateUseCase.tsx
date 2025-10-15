@@ -13,7 +13,11 @@ export default function CreateUseCase() {
 
   const createMutation = useMutation({
     mutationFn: async (data: InsertUseCase) => {
-      return apiRequest('POST', '/api/use-cases', data);
+      console.log('Submitting use case data:', data);
+      const response = await apiRequest('POST', '/api/use-cases', data);
+      const result = await response.json();
+      console.log('Create response:', result);
+      return result;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/use-cases'] });
@@ -24,6 +28,7 @@ export default function CreateUseCase() {
       setLocation('/use-cases');
     },
     onError: (error: Error) => {
+      console.error('Create error:', error);
       toast({
         title: "Error",
         description: error.message || "Failed to create use case",
