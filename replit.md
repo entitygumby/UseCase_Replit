@@ -66,10 +66,19 @@ The backend implements a RESTful API pattern with the following characteristics:
 ```typescript
 - users table: id, username, password
 - use_cases table: id, name, division, category, status, solution_type, 
-  priority_tier, description, benefits, impact, weekly_savings, complexity,
+  description, benefits, impact, weekly_savings, complexity,
   tech_stack (array), phase, team_contact, effort_estimate, dependencies,
   milestones, risk_assessment, success_criteria
 ```
+
+**Dropdown Options** (enforced via exported constants in shared/schema.ts):
+- **Division** (12 options): Compliance, Credit, Finance, Funds Mgmt, HR, Private Equity, Real Estate - Bris, Real Estate - Melb, Real Estate - Syd, Special Sits, Txn Mgmt, Other
+- **Category** (7 options): Dashboards & Reporting, Data Management, Document Generation, Notification & Alerts, Research & Analysis, Review & Quality Assurance, Workflow Automation
+- **Status** (4 options): New, Scoping, Developing, Live
+- **Implementation Phase** (5 options): Not Allocated, Phase 1, Phase 2, Phase 3, Phase 4
+- **Impact** (3 options): Low, Medium, High
+- **Solution Type** (3 options): AI Agent, AI Prompt, Automation
+- **Complexity** (3 options): Low, Medium, High
 
 **Migration Path**: The `IStorage` interface allows swapping the in-memory implementation with a Drizzle-based implementation without changing API routes or client code.
 
