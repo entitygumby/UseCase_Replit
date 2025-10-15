@@ -44,7 +44,6 @@ export class PostgresStorage implements IStorage {
       category: updates.category ?? existing.category,
       status: updates.status ?? existing.status,
       solutionType: updates.solutionType ?? existing.solutionType,
-      priorityTier: updates.priorityTier !== undefined ? (updates.priorityTier ?? null) : existing.priorityTier,
       description: updates.description !== undefined ? (updates.description ?? null) : existing.description,
       benefits: updates.benefits !== undefined ? (updates.benefits ?? null) : existing.benefits,
       impact: updates.impact !== undefined ? (updates.impact ?? null) : existing.impact,

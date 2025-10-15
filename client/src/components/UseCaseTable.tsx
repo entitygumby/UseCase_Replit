@@ -19,7 +19,6 @@ interface UseCase {
   teamContact: string | null;
   description: string | null;
   impact: string | null;
-  priorityTier: string | null;
 }
 
 interface UseCaseTableProps {
@@ -38,8 +37,7 @@ export default function UseCaseTable({ useCases, onRowClick }: UseCaseTableProps
             <TableHead className="font-semibold border-r border-r-foreground/15">Category</TableHead>
             <TableHead className="font-semibold border-r border-r-foreground/15">Status</TableHead>
             <TableHead className="font-semibold border-r border-r-foreground/15">Type</TableHead>
-            <TableHead className="font-semibold border-r border-r-foreground/15">Team Contact</TableHead>
-            <TableHead className="font-semibold">Priority</TableHead>
+            <TableHead className="font-semibold">Team Contact</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -63,14 +61,7 @@ export default function UseCaseTable({ useCases, onRowClick }: UseCaseTableProps
                   {useCase.solutionType}
                 </Badge>
               </TableCell>
-              <TableCell className="text-muted-foreground border-r border-r-foreground/15">{useCase.teamContact || 'N/A'}</TableCell>
-              <TableCell>
-                {useCase.priorityTier && (
-                  <Badge variant="secondary" className="font-normal">
-                    {useCase.priorityTier}
-                  </Badge>
-                )}
-              </TableCell>
+              <TableCell className="text-muted-foreground">{useCase.teamContact || 'N/A'}</TableCell>
             </TableRow>
           ))}
         </TableBody>

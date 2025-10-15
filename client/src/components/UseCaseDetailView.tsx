@@ -13,7 +13,6 @@ interface UseCaseDetailProps {
     category: string;
     status: string;
     solutionType: string;
-    priorityTier: string | null;
     description: string | null;
     benefits: string | null;
     impact: string | null;
@@ -64,9 +63,6 @@ export default function UseCaseDetailView({ useCase, onBack, onEdit, onDelete }:
             <div className="flex gap-2 items-center flex-wrap">
               <StatusBadge status={useCase.status} />
               <Badge variant="outline">{useCase.solutionType}</Badge>
-              {useCase.priorityTier && (
-                <Badge variant="secondary">{useCase.priorityTier}</Badge>
-              )}
             </div>
           </div>
         </div>
