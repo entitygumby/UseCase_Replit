@@ -7,6 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Search } from "lucide-react";
+import { divisions, statuses } from "@shared/schema";
 
 interface FilterBarProps {
   searchQuery: string;
@@ -48,9 +49,11 @@ export default function FilterBar({
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="all">All Statuses</SelectItem>
-          <SelectItem value="live">Live</SelectItem>
-          <SelectItem value="developing">Developing</SelectItem>
-          <SelectItem value="scoping">Scoping</SelectItem>
+          {statuses.map((status) => (
+            <SelectItem key={status} value={status}>
+              {status}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
 
@@ -60,10 +63,11 @@ export default function FilterBar({
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="all">All Divisions</SelectItem>
-          <SelectItem value="real estate sydney">Real Estate Sydney</SelectItem>
-          <SelectItem value="transaction management">Transaction Management</SelectItem>
-          <SelectItem value="finance">Finance</SelectItem>
-          <SelectItem value="legal">Legal</SelectItem>
+          {divisions.map((division) => (
+            <SelectItem key={division} value={division}>
+              {division}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
 
