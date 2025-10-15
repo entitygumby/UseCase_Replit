@@ -49,7 +49,7 @@ export default function UseCaseForm({
       name: "",
       division: "",
       category: "",
-      status: "Scoping",
+      status: "New",
       solutionType: "",
       description: "",
       benefits: "",
