@@ -82,9 +82,17 @@ export const insertUserSchema = createInsertSchema(users).pick({
   password: true,
 });
 
-export const insertUseCaseSchema = createInsertSchema(useCases).omit({
-  id: true,
-});
+export const insertUseCaseSchema = createInsertSchema(useCases)
+  .omit({
+    id: true,
+  })
+  .extend({
+    name: z.string().min(1, "Name is required"),
+    division: z.string().min(1, "Division is required"),
+    category: z.string().min(1, "Category is required"),
+    status: z.string().min(1, "Status is required"),
+    solutionType: z.string().min(1, "Solution Type is required"),
+  });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
