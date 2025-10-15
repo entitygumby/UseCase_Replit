@@ -87,11 +87,27 @@ export const insertUseCaseSchema = createInsertSchema(useCases)
     id: true,
   })
   .extend({
+    // Required fields with validation
     name: z.string().min(1, "Name is required"),
     division: z.string().min(1, "Division is required"),
     category: z.string().min(1, "Category is required"),
     status: z.string().min(1, "Status is required"),
     solutionType: z.string().min(1, "Solution Type is required"),
+    
+    // Optional fields - allow empty strings or null/undefined
+    description: z.string().optional().nullable(),
+    benefits: z.string().optional().nullable(),
+    impact: z.string().optional().nullable(),
+    weeklySavings: z.number().optional().nullable(),
+    complexity: z.string().optional().nullable(),
+    techStack: z.array(z.string()).optional().nullable(),
+    phase: z.string().optional().nullable(),
+    teamContact: z.string().optional().nullable(),
+    effortEstimate: z.string().optional().nullable(),
+    dependencies: z.string().optional().nullable(),
+    milestones: z.string().optional().nullable(),
+    riskAssessment: z.string().optional().nullable(),
+    successCriteria: z.string().optional().nullable(),
   });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
