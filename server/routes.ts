@@ -39,7 +39,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: validationError.message });
       }
 
-      const useCase = await storage.createUseCase(result.data);
+      const normalized = {
+        ...result.data,
+        description: result.data.description || null,
+        benefits: result.data.benefits || null,
+        impact: result.data.impact || null,
+        weeklySavings: result.data.weeklySavings ?? null,
+        complexity: result.data.complexity || null,
+        techStack: (result.data.techStack && result.data.techStack.length > 0) ? result.data.techStack : null,
+        phase: result.data.phase || null,
+        teamContact: result.data.teamContact || null,
+        effortEstimate: result.data.effortEstimate || null,
+        dependencies: result.data.dependencies || null,
+        milestones: result.data.milestones || null,
+        riskAssessment: result.data.riskAssessment || null,
+        successCriteria: result.data.successCriteria || null,
+      };
+
+      const useCase = await storage.createUseCase(normalized);
       res.status(201).json(useCase);
     } catch (error) {
       console.error("Error creating use case:", error);
@@ -56,7 +73,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: validationError.message });
       }
 
-      const useCase = await storage.updateUseCase(req.params.id, result.data);
+      const normalized = {
+        ...result.data,
+        description: result.data.description || null,
+        benefits: result.data.benefits || null,
+        impact: result.data.impact || null,
+        weeklySavings: result.data.weeklySavings ?? null,
+        complexity: result.data.complexity || null,
+        techStack: (result.data.techStack && result.data.techStack.length > 0) ? result.data.techStack : null,
+        phase: result.data.phase || null,
+        teamContact: result.data.teamContact || null,
+        effortEstimate: result.data.effortEstimate || null,
+        dependencies: result.data.dependencies || null,
+        milestones: result.data.milestones || null,
+        riskAssessment: result.data.riskAssessment || null,
+        successCriteria: result.data.successCriteria || null,
+      };
+
+      const useCase = await storage.updateUseCase(req.params.id, normalized);
       if (!useCase) {
         return res.status(404).json({ error: "Use case not found" });
       }
